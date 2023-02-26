@@ -69,7 +69,7 @@ impl Workout {
             res.push_str(&format!("* [ ] 5 x {set}\n"));
         }
         res.push_str("\n==== 5s PRO\n");
-        for percentage in vec![p1, p2, p3] {
+        for percentage in &[p1, p2, p3] {
             res.push_str(&format!(
                 "* [ ] 5 x {}\t/ 5 x {main_superset:?}\n",
                 round(primary_training_max * percentage, 4.)

@@ -30,8 +30,8 @@ impl Week {
 
         "#,
             self.week,
-            self.day1.format(&training_maxes),
-            self.day2.format(&training_maxes)
+            self.day1.format(training_maxes),
+            self.day2.format(training_maxes)
         )
     }
 }
