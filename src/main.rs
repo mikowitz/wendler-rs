@@ -1,4 +1,5 @@
 pub mod accessory;
+pub mod adoc;
 pub mod fsl;
 pub mod lift;
 pub mod week;

@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use crate::accessory::Accessory;
+use crate::adoc;
 use crate::fsl::round;
 use crate::lift::Lift;
 
@@ -51,42 +52,27 @@ impl Workout {
             self.main_lift.base_weight(),
             primary_training_max,
         );
-        let mut res = String::from(&format!("|=== Day: {} / {:?}\n", self.day, self.main_lift));
-        res.push_str(&format!(
-            "{:?}: [underline]#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#\n\n",
-            main_superset
+        let mut res = adoc::header(self.day, &self.main_lift);
+        res.push_str(&adoc::accessory_weight_entries(&[
+            main_superset,
+            core_superset,
+            core,
+        ]));
+        res.push_str(&adoc::warmups(warmup_sets));
+        res.push_str(&adoc::fives_pro(
+            &[p1, p2, p3],
+            primary_training_max,
+            main_superset,
         ));
-        res.push_str(&format!(
-            "{:?}: [underline]#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#\n\n",
-            core_superset
-        ));
-        res.push_str(&format!(
-            "{:?}: [underline]#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#\n\n",
-            core
-        ));
-        res.push_str("\n==== Warmup\n");
-        for set in warmup_sets {
-            res.push_str(&format!("* [ ] 5 x {set}\n"));
-        }
-        res.push_str("\n==== 5s PRO\n");
-        for percentage in &[p1, p2, p3] {
-            res.push_str(&format!(
-                "* [ ] 5 x {}\t/ 5 x {main_superset:?}\n",
-                round(primary_training_max * percentage, 4.)
-            ));
-        }
 
-        res.push_str(&format!("\n==== {secondary_lift:?} FSL\n"));
-        for _ in 1..=5 {
-            res.push_str(&format!(
-                "* [ ] 5 x {}\t/ 5 x {main_superset:?}\n",
-                round(secondary_training_max * p1, 4.)
-            ));
-        }
-        res.push_str("\n==== Accessory\n");
-        for _ in 1..=5 {
-            res.push_str(&format!("* [ ] 5 x {core_superset:?}\t/ 5 x {core:?}\n"));
-        }
+        res.push_str(&adoc::fsl(
+            p1,
+            secondary_lift,
+            secondary_training_max,
+            main_superset,
+        ));
+
+        res.push_str(&adoc::accessory_work(core_superset, core));
 
         res
     }
