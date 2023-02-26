@@ -1,0 +1,66 @@
+==========
+= Week 1
+==========
+
+== Day 1
+
+DL + Dips
+OHP + Chins/pulls
+GMs
+
+== Day 2
+
+Squat + Pushups
+Bench + Rows
+Ab wheel
+
+==========
+= Week 2 =
+==========
+
+== Day 1
+
+DL + Tri extensions
+OHP + Curls
+Hanging leg raise
+
+== Day 2
+
+Squat +  Dips
+Bench + Chins/pulls
+GMs
+
+==========
+= Week 3
+==========
+
+== Day 1
+
+DL + Pushups
+OHP + Rows
+Ab wheels
+
+== Day 2
+
+Squat + Tri extensions
+Bench + Curls
+Hanging leg raise
+
+Week 4
+
+
+week 1
+day 1 = 1
+day 2 = 2
+
+week 2
+day 1 = 3
+day 2 = 4
+
+week 3
+day 1 = 5
+day 2 = 6
+
+week 4
+day 1 = 7
+day 2 = 8

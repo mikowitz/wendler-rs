@@ -1,0 +1,57 @@
+=== Week 1
+
+[cols="2a,2a"]
+|===
+|=== Day: 1 / Deadlift
+
+==== Warmup
+* [ ] 5 x 95
+* [ ] 5 x 100
+* [ ] 5 x 120
+
+==== 5s PRO
+* [ ] 5 x 142.5 / 5 x Dips
+* [ ] 5 x 165   / 5 x Dips
+* [ ] 5 x 187.5 / 5 x Dips
+
+==== Squat FSL
+* [ ] 5 x 125   / 5 x Dips
+* [ ] 5 x 125   / 5 x Dips
+* [ ] 5 x 125   / 5 x Dips
+* [ ] 5 x 125   / 5 x Dips
+* [ ] 5 x 125   / 5 x Dips
+
+==== Accessory
+* [ ] 5 x ChinPulls     / 5 x GoodMornings
+* [ ] 5 x ChinPulls     / 5 x GoodMornings
+* [ ] 5 x ChinPulls     / 5 x GoodMornings
+* [ ] 5 x ChinPulls     / 5 x GoodMornings
+* [ ] 5 x ChinPulls     / 5 x GoodMornings
+
+|=== Day: 2 / OverheadPress
+
+==== Warmup
+* [ ] 5 x 45
+* [ ] 5 x 50
+
+==== 5s PRO
+* [ ] 5 x 57.5  / 5 x Rows
+* [ ] 5 x 67.5  / 5 x Rows
+* [ ] 5 x 77.5  / 5 x Rows
+
+==== BenchPress FSL
+* [ ] 5 x 87.5  / 5 x Rows
+* [ ] 5 x 87.5  / 5 x Rows
+* [ ] 5 x 87.5  / 5 x Rows
+* [ ] 5 x 87.5  / 5 x Rows
+* [ ] 5 x 87.5  / 5 x Rows
+
+==== Accessory
+* [ ] 5 x Pushups       / 5 x AbWheel
+* [ ] 5 x Pushups       / 5 x AbWheel
+* [ ] 5 x Pushups       / 5 x AbWheel
+* [ ] 5 x Pushups       / 5 x AbWheel
+* [ ] 5 x Pushups       / 5 x AbWheel
+
+|===
+
