@@ -1,0 +1,3 @@
+extends: default
+outline_list:
+  item_spacing: 0.5

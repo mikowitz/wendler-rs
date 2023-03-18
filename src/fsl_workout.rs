@@ -10,15 +10,16 @@ const WEEK_3_4_PERCENTAGES: (f32, f32, f32) = (0.70, 0.80, 0.90);
 const WEEK_5_6_PERCENTAGES: (f32, f32, f32) = (0.75, 0.85, 0.95);
 
 #[derive(Debug)]
-pub struct Workout {
+pub struct FslWorkout {
     week: u32,
     day: u32,
-    main_lift: Lift,
+    lower_body: Lift,
+    upper_body: Lift,
     accessory_set: (Accessory, Accessory, Accessory),
 }
 
-impl Workout {
-    pub fn new(week: u32, day: u32, main_lift: Lift) -> Self {
+impl FslWorkout {
+    pub fn new(week: u32, day: u32, lower_body: Lift, upper_body: Lift) -> Self {
         let accessory_set_number = if day == 1 {
             (week * 2 - 1) % 3
         } else {
@@ -28,7 +29,8 @@ impl Workout {
         Self {
             week,
             day,
-            main_lift,
+            lower_body,
+            upper_body,
             accessory_set,
         }
     }
@@ -37,43 +39,53 @@ impl Workout {
         let (p1, p2, p3) = percentages_for_week(self.week);
         let (push, pull, core) = &self.accessory_set;
 
-        let (main_superset, core_superset) = match self.main_lift {
-            Lift::Squat | Lift::Deadlift => (push, pull),
-            _ => (pull, push),
-        };
+        let lower_training_max = *training_maxes.get(&self.lower_body).unwrap();
+        let upper_training_max = *training_maxes.get(&self.upper_body).unwrap();
 
-        let secondary_lift = self.main_lift.secondary_lift();
-
-        let primary_training_max = *training_maxes.get(&self.main_lift).unwrap();
-        let secondary_training_max = *training_maxes.get(&secondary_lift).unwrap();
-
-        let warmup_sets = warmup_sets(
-            p1 * primary_training_max,
-            self.main_lift.base_weight(),
-            primary_training_max,
+        let lower_warmup_sets = warmup_sets(
+            p1 * lower_training_max,
+            self.lower_body.base_weight(),
+            lower_training_max,
         );
-        let mut res = adoc::header(self.day, &self.main_lift);
-        res.push_str(&adoc::accessory_weight_entries(&[
-            main_superset,
-            core_superset,
-            core,
-        ]));
-        res.push_str(&adoc::warmups(self.main_lift, warmup_sets));
-        res.push_str(&adoc::fives_pro(
-            self.main_lift,
-            &[p1, p2, p3],
-            primary_training_max,
-            main_superset,
-        ));
 
+        let upper_warmup_sets = warmup_sets(
+            p1 * upper_training_max,
+            self.upper_body.base_weight(),
+            upper_training_max,
+        );
+
+        let mut res = adoc::fsl_header(self.day, &self.lower_body, &self.upper_body);
+        res.push_str(&adoc::accessory_weight_entries(&[push, pull, core]));
+
+        res.push_str(&adoc::warmups(self.lower_body, lower_warmup_sets));
+        res.push_str(&adoc::fives_pro(
+            self.lower_body,
+            &[p1, p2, p3],
+            lower_training_max,
+            push,
+        ));
         res.push_str(&adoc::fsl(
             p1,
-            secondary_lift,
-            secondary_training_max,
-            main_superset,
+            self.lower_body.clone(),
+            lower_training_max,
+            push,
         ));
 
-        res.push_str(&adoc::accessory_work(core_superset, core));
+        res.push_str(&adoc::warmups(self.upper_body, upper_warmup_sets));
+        res.push_str(&adoc::fives_pro(
+            self.upper_body,
+            &[p1, p2, p3],
+            upper_training_max,
+            pull,
+        ));
+        res.push_str(&adoc::fsl(
+            p1,
+            self.upper_body.clone(),
+            upper_training_max,
+            pull,
+        ));
+
+        res.push_str(&adoc::core_only_accessory_work(core));
 
         res
     }
@@ -81,9 +93,9 @@ impl Workout {
 
 fn percentages_for_week(week: u32) -> (f32, f32, f32) {
     match week {
-        1 | 2 => WEEK_1_2_PERCENTAGES,
-        3 | 4 => WEEK_3_4_PERCENTAGES,
-        5 | 6 => WEEK_5_6_PERCENTAGES,
+        1 => WEEK_1_2_PERCENTAGES,
+        2 => WEEK_3_4_PERCENTAGES,
+        3 => WEEK_5_6_PERCENTAGES,
         _ => panic!(),
     }
 }

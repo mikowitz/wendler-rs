@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 #[derive(Debug)]
 pub enum Accessory {
     Dips,
@@ -9,6 +11,23 @@ pub enum Accessory {
     TricepExtensions,
     Curls,
     HangingLegRaises,
+}
+
+impl Display for Accessory {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let s = match self {
+            Self::Dips => "Dips",
+            Self::ChinPulls => "Chin/Pulls",
+            Self::GoodMornings => "Good Mornings",
+            Self::Pushups => "Pushups",
+            Self::Rows => "Rows",
+            Self::AbWheel => "Ab Wheel",
+            Self::TricepExtensions => "Tri. Exts.",
+            Self::Curls => "Curls",
+            Self::HangingLegRaises => "Leg Raises",
+        };
+        write!(f, "{s}")
+    }
 }
 
 impl Accessory {

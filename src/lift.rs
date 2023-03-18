@@ -1,9 +1,23 @@
-#[derive(Debug, PartialEq, Eq, Hash)]
+use std::fmt::Display;
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Lift {
     Squat,
     Deadlift,
     BenchPress,
     OverheadPress,
+}
+
+impl Display for Lift {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let s = match self {
+            Self::Squat => "Squat",
+            Self::Deadlift => "DL",
+            Self::BenchPress => "Bench",
+            Self::OverheadPress => "OH Press",
+        };
+        write!(f, "{s}")
+    }
 }
 
 impl Lift {
